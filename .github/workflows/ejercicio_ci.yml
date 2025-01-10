@@ -8,9 +8,14 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+    sql-version: ['5.7', '8.0']
+
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:${{matrix.sql-version}}
         env:
           MYSQL_ROOT_PASSWORD: uvlhub_root_password
           MYSQL_DATABASE: uvlhubdb_test
@@ -49,7 +54,7 @@ jobs:
 
   outdated_dependencies:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
