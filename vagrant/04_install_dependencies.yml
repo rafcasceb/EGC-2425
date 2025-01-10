@@ -2,35 +2,35 @@
   become: true
 
   tasks:
-    - name: Add deadsnakes PPA for installing Python 3.12
+    - name: Add deadsnakes PPA for installing Python 3.11
       apt_repository:
         repo: ppa:deadsnakes/ppa
         state: present
         update_cache: yes
 
-    - name: Update the system and install Python 3.12 and dependencies
+    - name: Update the system and install Python 3.11 and dependencies
       apt:
         name:
-          - python3.12
-          - python3.12-venv
+          - python3.11
+          - python3.11-venv
           - mariadb-client
         state: present
 
-    - name: Install pip and setuptools for Python 3.12 from source
+    - name: Install pip and setuptools for Python 3.11 from source
       shell: |
         wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py
-        python3.12 /tmp/get-pip.py
+        python3.11 /tmp/get-pip.py
       args:
         executable: /bin/bash
 
-    - name: Upgrade pip and setuptools for Python 3.12
+    - name: Upgrade pip and setuptools for Python 3.11
       shell: |
-        python3.12 -m pip install --upgrade pip setuptools
+        python3.11 -m pip install --upgrade pip setuptools
       args:
         executable: /bin/bash
 
-    - name: Set up the Python 3.12 virtual environment
-      command: python3.12 -m venv {{ working_dir }}/vagrant_venv
+    - name: Set up the Python 3.11 virtual environment
+      command: python3.11 -m venv {{ working_dir }}/vagrant_venv
       args:
         creates: "{{ working_dir }}/vagrant_venv/bin/activate"
 
